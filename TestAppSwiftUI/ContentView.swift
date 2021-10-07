@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
     
     init() {
         let navBarBackground = UINavigationBarAppearance()
         navBarBackground.configureWithOpaqueBackground()
-        navBarBackground.backgroundColor = UIColor(red: 0, green: 0.75, blue: 0.75, alpha: 1)
+        navBarBackground.backgroundColor = .darkTeal
         UINavigationBar.appearance().standardAppearance = navBarBackground
         UINavigationBar.appearance().scrollEdgeAppearance = navBarBackground
     }
@@ -33,7 +32,6 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            
             VStack {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
@@ -46,9 +44,7 @@ struct ContentView: View {
                             Rectangle()
                                 .frame(height: 1)
                                 .foregroundColor(.gray).opacity(0.25)
-
                         }
-                        
                         
                         Text(projectTitle)
                             .font(Font.custom("Avenir", size: 18, relativeTo: .headline))
@@ -87,16 +83,12 @@ struct ContentView: View {
                         
                         Spacer()
                         
-
-
                     } // end VStack
                     .padding(.horizontal, 16)
                     
                     Rectangle()
                         .frame(height: 1)
                         .foregroundColor(.gray).opacity(0.25)
-
-                    
                 } // end ScrollView
                 
                 GiveButtonView(alertShowing: $alertShowing)

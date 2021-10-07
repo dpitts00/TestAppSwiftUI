@@ -11,11 +11,7 @@ struct GiveButtonView: View {
     @Binding var alertShowing: Bool
     
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            
-//            LinearGradient(colors: [.gray.opacity(0.25), .white], startPoint: .bottom, endPoint: .top)
-//                .frame(height: 32)
-            
+        VStack(alignment: .center, spacing: 0) {            
             Rectangle()
                 .fill(Color.gray.opacity(0.25))
                 .frame(height: 1)
@@ -25,17 +21,17 @@ struct GiveButtonView: View {
                 alertShowing = true
                 
             } label: {
-                Text("Give Now!")
-                    .foregroundColor(.white)
-                    .font(Font.custom("Avenir", size: 28, relativeTo: .headline))
-                    .bold()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8).foregroundColor(.darkPurple)
+                        .padding(.horizontal, 16)
+                    Text("Give Now!")
+                        .foregroundColor(.white)
+                        .font(Font.custom("Avenir", size: 28, relativeTo: .headline))
+                        .bold()
+                }
             }
-            .padding()
+            .frame(height: 64)
             .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 8).foregroundColor(.darkPurple)
-                    .padding(.horizontal, 16)
-            )
             
             Rectangle()
                 .fill(Color.white)

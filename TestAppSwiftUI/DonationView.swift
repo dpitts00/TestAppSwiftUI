@@ -12,56 +12,65 @@ struct DonationView: View {
     @State private var firstName = ""
     @State private var lastName = ""
     @Binding var donationAmount: Double
-    @State private var donation = ""
     
     var body: some View {
         VStack(spacing: 16) {
             Text("Donation Form")
-                .font(.headline)
+                .font(Font.custom("Avenir", size: 24, relativeTo: .headline))
+                .bold()
             
             TextField("First name", text: $firstName)
-                .padding()
-                .border(Color.gray.opacity(0.25), width: 1)
+                .textFieldStyle(.roundedBorder)
+                .font(Font.custom("Avenir", size: 18, relativeTo: .headline))
+
             
-            TextField("Last name", text: $lastName)                .padding()
-                .border(Color.gray.opacity(0.25), width: 1)
-            
-            TextField("Enter an amount to donate", text: $donation, onCommit:  {
-                if let donation = Double(donation) {
-                    donationAmount = donation
-                }
-            })
-                .padding()
-                .border(Color.gray.opacity(0.25), width: 1)
-                .keyboardType(.decimalPad)
+            TextField("Last name", text: $lastName)
+                .textFieldStyle(.roundedBorder)
+                .font(Font.custom("Avenir", size: 18, relativeTo: .headline))
+
+            HStack {
+                Text("Donation Amount")
+                Spacer()
+                Text("$\(donationAmount, specifier: "%g")")
+            }
+            .font(Font.custom("Avenir", size: 18, relativeTo: .headline))
+
+            Slider(value: $donationAmount, in: 0...1000, step: 25) {
+                Text("Donation Amount")
+            } minimumValueLabel: {
+                Text("0")
+            } maximumValueLabel: {
+                Text("1000")
+            }
+            .font(Font.custom("Avenir", size: 18, relativeTo: .headline))
             
             Spacer()
             
             Button {
-                if let donation = Double(donation) {
-                    donationAmount = donation
-                }
                 presentationMode.wrappedValue.dismiss()
             } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8).foregroundColor(.darkPurple)
+                        .padding(.horizontal, 16)
                 Text("Donate Now")
                     .foregroundColor(.white)
                     .font(Font.custom("Avenir", size: 28, relativeTo: .headline))
                     .bold()
+                }
             }
-            .padding()
+            .frame(height: 64)
             .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 8).foregroundColor(.darkPurple)
-            )
             
-
         }
         .padding()
+        .onAppear {
+            donationAmount = 0
+        }
     }
 }
 
 struct DonationView_Previews: PreviewProvider {
     static var previews: some View {
-        DonationView(donationAmount: .constant(0))
+        DonationView(donationAmount: .constant(125))
     }
 }

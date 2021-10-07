@@ -26,14 +26,12 @@ struct CustomProgressView: View {
                 }
             }
             .clipShape(Capsule())
-
             
             Capsule()
                 .strokeBorder(lineWidth: 1, antialiased: true)
                 .foregroundColor(Color(white: 0.6))
         }
         .frame(height: 24)
-
     }
 }
 
